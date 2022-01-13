@@ -166,17 +166,17 @@ func (u *User) UpdateAUser(db *gorm.DB, uid uint32) (*User, error) {
 
 		db = db.Debug().Model(&User{}).Where("id = ?", uid).Take(&User{}).UpdateColumns(
 			map[string]interface{}{
-				"password":  u.Password,
-				"email":     u.Email,
-				"update_at": time.Now(),
+				"password":   u.Password,
+				"email":      u.Email,
+				"updated_at": time.Now(),
 			},
 		)
 	}
 
 	db = db.Debug().Model(&User{}).Where("id = ?", uid).Take(&User{}).UpdateColumns(
 		map[string]interface{}{
-			"email":     u.Email,
-			"update_at": time.Now(),
+			"email":      u.Email,
+			"updated_at": time.Now(),
 		},
 	)
 	if db.Error != nil {
@@ -195,7 +195,7 @@ func (u *User) UpdateAUserAvatar(db *gorm.DB, uid uint32) (*User, error) {
 	db = db.Debug().Model(&User{}).Where("id = ?", uid).Take(&User{}).UpdateColumns(
 		map[string]interface{}{
 			"avatar_path": u.AvatarPath,
-			"update_at":   time.Now(),
+			"updated_at":  time.Now(),
 		},
 	)
 	if db.Error != nil {
@@ -229,8 +229,8 @@ func (u *User) UpdatePassword(db *gorm.DB) error {
 
 	db = db.Debug().Model(&User{}).Where("email = ?", u.Email).Take(&User{}).UpdateColumns(
 		map[string]interface{}{
-			"password":  u.Password,
-			"update_at": time.Now(),
+			"password":   u.Password,
+			"updated_at": time.Now(),
 		},
 	)
 	if db.Error != nil {
